@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<YourNamespace.Models.Course>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@foreach (var course in Model)
+{
+    <div>
+        <h3>@course.Title</h3>
+        <p>@course.Description</p>
+        <p>@Html.ActionLink("Enroll", "Enroll", new { id = course.CourseId })</p>
+    </div>
+}

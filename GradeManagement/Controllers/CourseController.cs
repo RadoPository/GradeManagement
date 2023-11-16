@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GradeManagement.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GradeManagement.Controllers
 {
     public class CourseController : Controller
     {
+        private readonly SchoolContext db = new SchoolContext();
+
         // GET: CourseController
         public ActionResult Index()
         {

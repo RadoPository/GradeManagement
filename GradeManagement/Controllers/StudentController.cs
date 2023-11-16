@@ -1,12 +1,47 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GradeManagement.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GradeManagement.Controllers
 {
     public class StudentController : Controller
     {
-        // GET: StudentController
-        public ActionResult Index()
+        
+            private readonly SchoolContext db = new SchoolContext();
+
+            // GET: Student/Login
+            public ActionResult Login()
+            {
+                return View();
+            }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Login(StudentLoginViewModel model)
+            {
+                if (ModelState.IsValid)
+                {
+                    var student = db.Students
+                                    .FirstOrDefault(s => s.Email == model.Email && s.Password == model.Password);
+
+                    if (student != null)
+                    {
+                        // In a real application, you'd set up authentication here
+                        // For example, using FormsAuthentication.SetAuthCookie
+                        return RedirectToAction("Index", "Home"); // Redirect to the main page after login
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid email or password");
+                    }
+                }
+
+                return View(model);
+            }
+
+
+            // GET: StudentController
+            public ActionResult Index()
         {
             return View();
         }
