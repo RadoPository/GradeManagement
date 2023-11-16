@@ -1,5 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model GradeManagement.ViewModels.CourseEnrollmentViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.CourseId)
+    @Html.HiddenFor(model => model.StudentId)
+
+    <h2>Enroll in @Model.Title</h2>
+
+    <input type="submit" value="Enroll" />
 }
